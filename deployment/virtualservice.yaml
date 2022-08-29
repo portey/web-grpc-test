@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: web-grpc-go-route
+  namespace: istio-system
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - public-gateway
+  http:
+    - name: "web-grpc-go-route"
+      route:
+        - destination:
+            host: web-grpc-go.default.svc.cluster.local
+            port:
+              number: 80
+      corsPolicy:
+        allowOrigin:
+          - "*"
+        allowMethods:
+          - POST
+          - OPTIONS
+        allowHeaders:
+          - grpc-timeout
+          - content-type
+          - keep-alive
+          - user-agent
+          - cache-control
+          - content-type
+          - content-transfer-encoding
+          - x-accept-content-transfer-encoding
+          - x-accept-response-streaming
+          - x-user-agent
+          - x-grpc-web

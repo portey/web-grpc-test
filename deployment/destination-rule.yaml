@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: no-inner-tls
+  namespace: istio-system
+spec:
+  host: "*.svc.cluster.local"
+  trafficPolicy:
+    portLevelSettings:
+      - port:
+          number: 80
+        tls:
+          mode: DISABLE
+#        connectionPool:
+#          http:
+#            useClientProtocol: true
